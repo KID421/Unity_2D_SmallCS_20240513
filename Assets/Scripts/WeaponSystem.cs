@@ -24,8 +24,8 @@ namespace KID
         /// </summary>
         public virtual void Fire()
         {
-            GameObject tempBullet = Instantiate(prefabBullet, spawnBulletPoint.position, Quaternion.identity);
-            tempBullet.GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletSpeed);
+            GameObject tempBullet = Instantiate(prefabBullet, spawnBulletPoint.position, spawnBulletPoint.rotation);
+            tempBullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed);
         }
     }
 }
