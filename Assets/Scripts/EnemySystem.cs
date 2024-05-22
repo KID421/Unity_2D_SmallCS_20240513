@@ -43,7 +43,7 @@ namespace KID
         {
             ani.SetFloat(GameManager.parMove, rig.velocity.magnitude / moveSpeed);
             if (distance <= stopDistance) return;
-            rig.velocity = transform.right * -moveSpeed;
+            rig.velocity = transform.right * moveSpeed;
         }
 
         /// <summary>
