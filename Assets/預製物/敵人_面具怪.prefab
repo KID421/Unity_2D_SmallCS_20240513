@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4838603277675640427}
   - component: {fileID: 2433486044887109145}
   - component: {fileID: 6190752449386797749}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u6575\u4EBA_\u9762\u5177\u602A"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,10 +185,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7986b534527efd4987af8dd36898753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 1.5
+  stairSpeed: 2
+  stairOffset: {x: 0, y: 0, z: 0}
+  stairLength: 1
+  layerStair:
+    serializedVersion: 2
+    m_Bits: 512
   stopDistance: 7
-  moveSpeed: 2.5
-  weaponEnemy: {fileID: 6625705229100065833}
-  fireInterval: 2
 --- !u!114 &6190752449386797749
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,12 +3,12 @@
 namespace KID
 {
     /// <summary>
-    /// 控制系統
+    /// 移動系統
     /// </summary>
-    public class ControlSystem : MonoBehaviour
+    public class MoveSystem : MonoBehaviour
     {
         [SerializeField, Header("移動速度"), Range(0, 10)]
-        private float moveSpeed = 3.5f;
+        protected float moveSpeed = 3.5f;
         [SerializeField, Header("爬階梯速度"), Range(0, 10)]
         private float stairSpeed = 2;
         [SerializeField, Header("階梯檢查位移")]
@@ -16,12 +16,10 @@ namespace KID
         [SerializeField, Header("階梯檢查長度"), Range(0, 3)]
         private float stairLength = 1;
         [SerializeField, Header("階梯圖層")]
-        private LayerMask layerStair;
+        private LayerMask layerStair = 1 << 9;
 
         private Rigidbody2D rig;
         private Animator ani;
-
-        private float h => Input.GetAxis("Horizontal");
 
         private void OnDrawGizmos()
         {
@@ -29,23 +27,18 @@ namespace KID
             Gizmos.DrawRay(transform.position + stairOffset, transform.right * stairLength);
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             rig = GetComponent<Rigidbody2D>();
             ani = GetComponent<Animator>();
         }
 
-        private void Update()
-        {
-            Move();
-        }
-
         /// <summary>
         /// 移動
         /// </summary>
-        private void Move()
+        protected void Move(float h)
         {
-            rig.velocity = new Vector2(h * moveSpeed, Grivaty());
+            rig.velocity = transform.right * h * moveSpeed  + transform.up * Grivaty(h);
             ani.SetFloat(GameManager.parMove, rig.velocity.magnitude);
         }
 
@@ -62,7 +55,7 @@ namespace KID
         /// <summary>
         /// 重力
         /// </summary>
-        private float Grivaty()
+        private float Grivaty(float h)
         {
             float hAbs = Mathf.Abs(h);
             float grivaty = Stairs() && hAbs > 0.8f ? hAbs * stairSpeed : rig.velocity.y;
